@@ -20,7 +20,7 @@ jobs:
     - name: Correr pruebas
       id: correr-pruebas
       run: python -m unittest -v tests/test_persona.py
-    -name: Calculo de cubirmiento
+    - name: Calculo de cubirmiento
       id: cubrimiento
       run: |
         coveerage run -m unittest tests/test_persona.py
