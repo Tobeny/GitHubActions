@@ -32,7 +32,7 @@ jobs:
     - name: Cálculo de cubrimiento
       id: cubrimiento
       run: |
-        coverave run -m unittest tests/test_persona.py
+        coverage run -m unittest tests/test_persona.py
         coverage report -m
   automerge:
     name: Automerge
