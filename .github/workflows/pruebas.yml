@@ -15,7 +15,7 @@ jobs:
           python-version: '3.7'
     - name: Instalación de librerías y dependencias
       run: |
-        pip install --upgrade
+        python3 -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Correr pruebas
       id: correr-pruebas
