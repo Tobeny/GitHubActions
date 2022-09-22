@@ -2,7 +2,7 @@ name: Release to main
 on:
   pull_request:
     types:
-      - closed
+      - opened
     branches: [ develop ]
 jobs:
   job1:
