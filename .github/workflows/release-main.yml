@@ -1,11 +1,20 @@
 name: Release to main
 on:
-  push:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - synchronize
+      - opened
+      - edited
+      - ready_for_review
+      - reopened
+      - unlocked
     branches: [ develop ]
 jobs:
   job1:
     name: Verificacion pruebas any push
-    #if: ${{ contains(github.event.head_commit.message, 'Automerge') }}
+    if: ${{ contains(github.event.head_commit.message, 'Automerge') }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout de repositorio
