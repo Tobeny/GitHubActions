@@ -20,24 +20,17 @@ jobs:
         pip install -r requirements.txt
     - name: Pull rama develop to feature-*
       if: ${{ contains(github.event.head_commit.message, '(Verde)') }}
-      steps:
-      - name: merge
-        uses: tukasz/direct-merge-action@master
-        with:
+      uses: tukasz/direct-merge-action@master
+      with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           source-branch: develop
           target-branch: ${{ github.ref }}
-      - name: Correr pruebas
-        id: correr-pruebas
-        run: python -m unittest discover -s tests
-      - name: Validar resultado sin errores
-        if: ${{ contains(github.event.head_commit.message, '(Verde)') && success() }}
-        uses: tukasz/direct-merge-action@master
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          source-branch: ${{ github.ref }}
-          target-branch: develop
-      run: |
-        echo 'Done'
+      run: python -m unittest discover -s tests
+      if: ${{ contains(github.event.head_commit.message, '(Verde)') && success() }}
+      uses: tukasz/direct-merge-action@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        source-branch: ${{ github.ref }}
+        target-branch: develop
     
     
