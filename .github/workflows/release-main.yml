@@ -1,0 +1,40 @@
+name: Push branch feature* y merge develop to feature 2
+on:
+  push:
+    branches: [ develop ]
+jobs:
+  job1:
+    name: Verificacion pruebas any push
+    if: ${{ contains(github.event.head_commit.message, '(Verde)') }}
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout de repositorio
+      uses: actions/checkout@v2
+    - name: Configuración de entorno de python
+      uses: actions/setup-python@v2
+      with:
+          python-version: '3.7'
+    - name: Instalación de librerías y dependencias
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Crear rama
+      run: |
+        git checkout -b release
+        git push -f -u origin release
+    - name: Pull rama develop to release  
+      uses: tukasz/direct-merge-action@master
+      with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          source-branch: develop
+          target-branch: release
+    - name: Correr pruebas
+      id: correr-pruebas
+      run: python -m unittest discover -s tests
+    - name: Validar resultado sin errores
+      if: ${{ success() }}
+      uses: tukasz/direct-merge-action@master
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        source-branch: release
+        target-branch: main
