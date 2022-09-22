@@ -80,3 +80,6 @@ class PersonaTestCase(unittest.TestCase):
     
     def test11(self):
         self.assertEqual(True, True)
+    
+    def test12(self):
+        self.assertEqual(True, True)
