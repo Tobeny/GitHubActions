@@ -25,7 +25,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           source-branch: develop
           target-branch: ${{ github.ref }}
-      run: python -m unittest discover -s tests
+      - name: Correr pruebas
+        id: correr-pruebas
+        run: python -m unittest discover -s tests
       if: ${{ contains(github.event.head_commit.message, '(Verde)') && success() }}
       uses: tukasz/direct-merge-action@master
       with:
