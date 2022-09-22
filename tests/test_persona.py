@@ -71,3 +71,6 @@ class PersonaTestCase(unittest.TestCase):
 
     def test8(self):
         self.assertEqual(True, True)
+    
+    def test8(self):
+        self.assertEqual(True, False)
