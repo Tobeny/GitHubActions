@@ -5,7 +5,7 @@ on:
 jobs:
   job1:
     name: Verificacion pruebas any push
-    if: ${{ contains(github.event.head_commit.message, '(Automerge)') }}
+    if: ${{ contains(github.event.head_commit.message, 'Automerge') }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout de repositorio
