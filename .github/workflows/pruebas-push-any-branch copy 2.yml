@@ -6,6 +6,7 @@ on:
 jobs:
   job1:
     name: Verificacion pruebas any push
+    if: ${{ contains(github.event.head_commit.message, '(Verde)') }}
     runs-on: ubuntu-latest
     steps:
     - name: Checkout de repositorio
@@ -18,9 +19,8 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Pull rama develop to feature-*
+    - name: Pull rama develop to feature-*  
       uses: tukasz/direct-merge-action@master
-      if: ${{ contains(github.event.head_commit.message, '(Verde)') }}
       with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           source-branch: develop
@@ -28,13 +28,10 @@ jobs:
     - name: Correr pruebas
       id: correr-pruebas
       run: python -m unittest discover -s tests
-    - name: Validar resultado con errores
-      if: ${{ failure() }}
-      run: exit 1
     - name: Validar resultado sin errores
+      if: ${{ success() }}
       uses: tukasz/direct-merge-action@master
-      if: ${{ contains(github.event.head_commit.message, '(Verde)') && success() }}
       with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          source-branch: ${{ github.ref }}
-          target-branch: develop
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        source-branch: ${{ github.ref }}
+        target-branch: develop
