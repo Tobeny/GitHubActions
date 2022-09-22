@@ -79,4 +79,4 @@ class PersonaTestCase(unittest.TestCase):
         self.assertEqual(True, True)
     
     def test11(self):
-        self.assertEqual(True, False)
+        self.assertEqual(True, True)

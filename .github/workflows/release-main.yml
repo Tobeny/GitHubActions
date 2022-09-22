@@ -1,4 +1,4 @@
-name: Push branch feature* y merge develop to feature 2
+name: Release to main
 on:
   push:
     branches: [ develop ]
