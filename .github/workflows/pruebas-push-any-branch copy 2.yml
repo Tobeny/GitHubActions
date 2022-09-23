@@ -1,11 +1,11 @@
-name: Push branch feature* y merge develop to feature 2
+name: Push en branch feature y automerge en develop
 on:
   push:
     branches:
       - 'feature-**'
 jobs:
   job1:
-    name: Verificacion pruebas any push
+    name: Identificar en commit palabra clave = (Verde)
     if: ${{ contains(github.event.head_commit.message, '(Verde)') }}
     runs-on: ubuntu-latest
     steps:
@@ -19,16 +19,16 @@ jobs:
       run: |
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Pull rama develop to feature-*  
+    - name: Hacer merge de rama develop a feature 
       uses: tukasz/direct-merge-action@master
       with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           source-branch: develop
           target-branch: ${{ github.ref }}
-    - name: Correr pruebas
+    - name: Ejecución de pruebas unitarias
       id: correr-pruebas
       run: python -m unittest discover -s tests
-    - name: Validar resultado sin errores
+    - name: Validar resultado sin errores y hacer merge de rama feature a develop
       if: ${{ success() }}
       uses: tukasz/direct-merge-action@master
       with:
