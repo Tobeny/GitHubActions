@@ -56,3 +56,6 @@ class PersonaTestCase(unittest.TestCase):
     
     def testParaMain2(self):
         self.assertEqual(True, True)
+
+    def testParaMain3(self):
+        self.assertEqual(True, True)
