@@ -28,6 +28,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           source-branch: develop
           target-branch: release
+    # - name: Checkout de repositorio release
+    #   uses: actions/checkout@v2
+    #   with: 
+    #     ref: release
     - name: Correr pruebas
       id: correr-pruebas
       run: python -m unittest discover -s tests
