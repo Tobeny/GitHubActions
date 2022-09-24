@@ -35,4 +35,4 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUBACTIONSSECRET }}
         source-branch: ${{ github.ref }}
         target-branch: develop
-        commit-message: "Automerge to develop"
+        commit-message: "Automerge to develop "
