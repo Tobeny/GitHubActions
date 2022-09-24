@@ -32,7 +32,7 @@ jobs:
       if: ${{ success() }}
       uses: tukasz/direct-merge-action@master
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUBACTIONSSECRET }}
         source-branch: ${{ github.ref }}
         target-branch: develop
-        commit-message: "Automerge to develop"
+        commit-message: "Automerge to develop "
